@@ -8,7 +8,9 @@ on:
 
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+  TEST_TAG: marcoliew/gaargok8s:test
+  LATEST_TAG: marcoliew/my-app:latest  
 
 jobs:
   deploy:
@@ -17,22 +19,22 @@ jobs:
     steps:
       # Checkout the code from GitHub repository
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         
       - name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}  
+          password: ${{ secrets.DOCKER_TOKEN }}  
 
       # Build Docker image and push it to Docker Hub
       - name: Build and push Docker image
         run: |
-          docker build -t ${DOCKER_USERNAME}/my-app:latest -f argocd-cicd-setup/Dockerfile .
-          docker push ${DOCKER_USERNAME}/my-app:latest
+          docker build -t ${LATEST_TAG} -f argocd-cicd-setup/Dockerfile .
+          docker push ${LATEST_TAG}
       - name: Login to GitHub Packages
         uses: actions/checkout@v3
         with:
-          repository: ravindrasinghh/argocd-setup
+          repository: marcoliew/argocd-setup
           ref: 'master'
-          token: ${{ secrets.G_TOKEN }}
+          #token: ${{ secrets.G_TOKEN }}
