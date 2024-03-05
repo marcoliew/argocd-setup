@@ -9,10 +9,13 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: my-app-project
-  source:
-    repoURL: https://github.com/marcoliew/argocd-setup.git
-    targetRevision: HEAD
-    path: argocd-cicd-setup/dev/
+  sources:
+    - repoURL: https://github.com/marcoliew/argocd-setup.git
+      targetRevision: argo
+      path: argocd-cicd-setup/dev/
+    - repoURL: https://github.com/marcoliew/argocd-setup.git
+      targetRevision: docker
+      path: docker   
   destination:
     server: https://kubernetes.default.svc
     namespace: my-app
