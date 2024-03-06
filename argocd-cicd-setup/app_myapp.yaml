@@ -13,13 +13,13 @@ metadata:
     argocd-image-updater.argoproj.io/git-branch: argo
 spec:
   project: my-app-project
-  sources:
-    - repoURL: https://github.com/marcoliew/argocd-setup.git
-      targetRevision: argo
-      path: argocd-cicd-setup/dev/
-    - repoURL: https://github.com/marcoliew/argocd-setup.git
-      targetRevision: docker
-      path: docker   
+  source:
+    repoURL: https://github.com/marcoliew/argocd-setup.git
+    targetRevision: argo
+    path: argocd-cicd-setup/dev/
+    # - repoURL: https://github.com/marcoliew/argocd-setup.git
+    #   targetRevision: docker
+    #   path: docker   
   destination:
     server: https://kubernetes.default.svc
     namespace: my-app
