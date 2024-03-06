@@ -7,15 +7,19 @@ metadata:
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: marcoliew/my-app:latest
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+    argocd-image-updater.argoproj.io/git-branch: argo
 spec:
   project: my-app-project
-  source:
-    repoURL: https://github.com/marcoliew/argocd-setup.git
-    targetRevision: argo
-    path: argocd-cicd-setup/dev/
-    # - repoURL: https://github.com/marcoliew/argocd-setup.git
-    #   targetRevision: docker
-    #   path: docker   
+  sources:
+    - repoURL: https://github.com/marcoliew/argocd-setup.git
+      targetRevision: argo
+      path: argocd-cicd-setup/dev/
+    - repoURL: https://github.com/marcoliew/argocd-setup.git
+      targetRevision: docker
+      path: docker   
   destination:
     server: https://kubernetes.default.svc
     namespace: my-app
