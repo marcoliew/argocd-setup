@@ -17,7 +17,7 @@ spec:
   sourceRepos:
   - '*'
   destinations:
-  - namespace: my-app
+  - namespace: '*'
     server: https://kubernetes.default.svc
   # Deny all cluster-scoped resources from being created, except for Namespace
   clusterResourceWhitelist:
