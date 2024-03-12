@@ -16,7 +16,7 @@ spec:
   source:
     repoURL: https://github.com/marcoliew/argocd-manifest.git
     targetRevision: HEAD
-    path: /env/dev/
+    path: env/dev/
   destination:
     server: https://kubernetes.default.svc
     namespace: manifest

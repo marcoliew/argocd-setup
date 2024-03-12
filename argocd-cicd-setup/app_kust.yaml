@@ -20,6 +20,7 @@ spec:
     path: env/dev/
   destination:
     server: https://kubernetes.default.svc
+    namespace: kust
   syncPolicy:
     automated:
       prune: true
