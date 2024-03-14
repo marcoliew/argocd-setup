@@ -7,5 +7,12 @@ dex:
   enabled: false
 
 server:
+  service:
+    type: LoadBalancer
+    servicePortHttps: 9999
   extraArgs:
     - --insecure
+
+# configs:
+#   secret:
+#     argocdServerAdminPassword: "abcdef" # real password is here
