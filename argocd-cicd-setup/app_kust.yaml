@@ -10,7 +10,7 @@ metadata:
   annotations:
     argocd-image-updater.argoproj.io/image-list: kust=marcoliew/my-app
     argocd-image-updater.argoproj.io/kust.update-strategy: latest
-    # argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/github-ssh-secret-kust
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/github-ssh-secret-kust
     # argocd-image-updater.argoproj.io/git-branch: main
 spec:
   project: my-app-project
