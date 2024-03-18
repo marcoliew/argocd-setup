@@ -1,0 +1,39 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apphelm
+  namespace: argocd 
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: marcoliew/my-app 
+spec:
+  project: argocdprj
+  source:
+    repoURL: ssh://git@github.com/marcoliew/argocd-app-helm.git
+    targetRevision: main
+    path: env/dev/my-app
+    helm:
+      - name: "replicaCount"
+        value: "2"
+      - name: "image.repository"
+        value: marcoliew/my-app
+      - name: "image.tag"
+        value: latest
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+      
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+      - ApplyOutOfSyncOnly=true
