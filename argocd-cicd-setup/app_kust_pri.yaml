@@ -2,22 +2,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: appkust
+  name: appkustpri
   namespace: argocd 
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd-image-updater.argoproj.io/image-list: kust=marcoliew/my-app    #alias= cannot be ingored.
-    argocd-image-updater.argoproj.io/kust.update-strategy: latest
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/github-ssh-secret-kust
-    argocd-image-updater.argoproj.io/git-branch: main
+    argocd-image-updater.argoproj.io/image-list: marcoliew/my-app-pri
 spec:
   project: argocdprj
   source:
     repoURL: ssh://git@github.com/marcoliew/argocd-app-kust.git
     targetRevision: main
-    path: env/dev/my-app
+    path: env/dev/my-app-pri
   destination:
     server: https://kubernetes.default.svc
     namespace: kust

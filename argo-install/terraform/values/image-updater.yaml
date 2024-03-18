@@ -5,11 +5,11 @@ image:
 metrics:
   enabled: true
 
-# config:
-#   registries:
-#     - name: Docker Hub
-#       api_url: https://registry-1.docker.io
-#       ping: yes
-#       credentials: secret:argocd/dockerhub#my-token
-#       limit: 20
-#       default: true
+config:
+  registries:
+    - name: Docker Hub
+      api_url: https://registry-1.docker.io
+      ping: yes
+      credentials: secret:argocd/docker-secret-updater#my-token
+      limit: 20
+      default: true
