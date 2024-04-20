@@ -1,18 +1,28 @@
----
-global:
-  image:
-    tag: "v2.2.5"
+# global:
+#   image:
+#     tag: "v2.2.5"
 
-dex:
-  enabled: false
+# dex:
+#   enabled: false
 
+# Disable HTTPS; most of the time, it's exposed only internally,
+configs:
+  params:
+    server.insecure: true
+
+# and if needed, it can be secured with TLS using Ingress.
 server:
   service:
     type: LoadBalancer
+    servicePortHttp: 81
     servicePortHttps: 9999
   extraArgs:
-    - --insecure
+  - --insecure
 
-# configs:
-#   secret:
-#     argocdServerAdminPassword: "abcdef" # real password is here
+notifications:
+  enabled: true
+  secret:
+    create: false
+  cm:
+    create: false
+
